@@ -1,15 +1,17 @@
 version: "3.3"
+
 services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    env_file: .env
     environment:
-      - PUID=1000
-      - PGID=1000
+      PUID: $PUID
+      PGID: $PGID
     ports:
       - 3000:3000
     volumes:
-      - .config:/app/config # Make sure your local config directory exists
+      - ~/projects/Exodus/config:/app/config # Make sure your local config directory exists
       - /media/omega:/media
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped
@@ -17,12 +19,12 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    env_file: .env
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Singapore
+      PUID: $PUID
+      PGID: $PGID
     volumes:
-      - .config:/config
+      - ~/projects/Exodus/config:/config
       - /media/omega/anime:/data/anime
       - /media/omega/movies:/data/movies
       - /media/omega/tvshows:/data/tvshows

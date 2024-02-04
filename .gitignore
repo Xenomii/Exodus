@@ -1,0 +1,10 @@
+config/cache/
+config/data/
+config/dlna/
+config/log/
+config/logs/
+config/*.css
+config/*.js
+config/*.json
+config/*.xml
+.env
