@@ -7,4 +7,5 @@ config/*.css
 config/*.js
 config/*.json
 config/*.xml
+web/
 .env

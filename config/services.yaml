@@ -13,6 +13,23 @@
             key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"
             enableBlocks: true # optional, defaults to false
             enableNowPlaying: true # optional, defaults to true
+        server: my-docker
+        container: jellyfin
+        showStats: true
+        statusStyle: 'dot'
+
+- Network:
+    - Speedtest:
+        icon: speedtest-tracker.png
+        href: http://192.168.1.120:8080
+        description: A Self-Hosted Performance Tracking Application
+        widget:
+            type: speedtest
+            url: http://192.168.1.120:8080
+        server: my-docker
+        container: speedtest-tracker
+        showStats: true
+        statusStyle: 'dot'
 
 # - My First Group:
 #     - My First Service:
