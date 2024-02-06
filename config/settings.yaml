@@ -20,6 +20,8 @@ layout:
         style: row
         columns: 2
 
+headerStyle: boxedWidgets
+
 providers:
   openweathermap: openweathermapapikey
   weatherapi: weatherapiapikey
