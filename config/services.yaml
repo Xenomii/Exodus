@@ -30,6 +30,19 @@
         container: speedtest-tracker
         showStats: true
         statusStyle: 'dot'
+    - Portainer:
+        icon: portainer.png
+        href: https://192.168.1.120:9443
+        description: Container Management Software for Kubernetes and Docker
+        widget:
+            type: portainer
+            url: https://192.168.1.120:9443
+            env: 2
+            key: ptr_LC91Px1D2Z/897RuXnyvK7d+rMKPY+5A+86xtBa0c2U=
+        server: my-docker
+        container: portainer
+        showStats: true
+        statusStyle: 'dot'
 
 # - My First Group:
 #     - My First Service:

@@ -53,6 +53,7 @@ services:
         restart: unless-stopped
         depends_on:
             - db
+
   db:
       image: mariadb:10
       restart: always
@@ -63,6 +64,18 @@ services:
           - MARIADB_RANDOM_ROOT_PASSWORD=true
       volumes:
           - speedtest-db:/var/lib/mysql
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - 9443:9443
+    volumes:
+      - portainer-data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  
 volumes:
   speedtest-app:
   speedtest-db:
+  portainer-data:
