@@ -1,3 +1,3 @@
 #!/bin/bash
 TERM=xterm
-iftop -i wlp3s0
+iftop -i enp2s0

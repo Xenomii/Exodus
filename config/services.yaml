@@ -5,7 +5,7 @@
 - Media:
     - Jellyfin:
         icon: jellyfin.png
-        href: http://192.168.1.120:8096
+        href: http://exodus.lan:8096
         description: The Free Software Media System
         widget:
             type: jellyfin
@@ -21,7 +21,7 @@
 - Network:
     - Speedtest:
         icon: speedtest-tracker.png
-        href: http://192.168.1.120:8080
+        href: http://exodus.lan:8080
         description: A Self-Hosted Performance Tracking Application
         widget:
             type: speedtest
@@ -32,17 +32,26 @@
         statusStyle: 'dot'
     - Portainer:
         icon: portainer.png
-        href: https://192.168.1.120:9443
+        href: https://exodus.lan:9443
         description: Container Management Software for Kubernetes and Docker
         widget:
             type: portainer
             url: https://192.168.1.120:9443
             env: 2
-            key: ptr_LC91Px1D2Z/897RuXnyvK7d+rMKPY+5A+86xtBa0c2U=
+            key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
         server: my-docker
         container: portainer
         showStats: true
         statusStyle: 'dot'
+    - PiHole:
+        icon: pi-hole.png
+        href: http://192.168.1.121/admin
+        description: Network-wide Ad Blocking
+        server: my-docker
+        container: pihole
+        showStats: true
+        statusStyle: 'dot'
+
 
 # - My First Group:
 #     - My First Service:

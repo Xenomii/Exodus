@@ -8,4 +8,6 @@ config/*.js
 config/*.json
 config/*.xml
 web/
+duckdns/
+pihole/
 .env

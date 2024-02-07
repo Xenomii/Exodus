@@ -4,76 +4,111 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    env_file: .env
+    env_file:
+      - .env
     environment:
-      PUID: $HOMEPAGE_PUID
-      PGID: $HOMEPAGE_PGID
+      PUID: ${HOMEPAGE_PUID}
+      PGID: ${HOMEPAGE_PGID}
     ports:
       - 3000:3000
     volumes:
-      - ~/projects/Exodus/config:/app/config # Make sure your local config directory exists
-      - /media/omega:/media
+      - ${PROJECT_FOLDER}/config:/app/config # Make sure your local config directory exists
+      - ${SECONDARY_STORAGE}:/omega
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
-    env_file: .env
     environment:
-      PUID: $PUID
-      PGID: $PGID
+      - PUID=${PUID}
+      - PGID=${PGID}
     volumes:
-      - ~/projects/Exodus/config:/config
-      - /media/omega/anime:/data/anime
-      - /media/omega/movies:/data/movies
-      - /media/omega/tvshows:/data/tvshows
+      - ${PROJECT_FOLDER}/config:/config
+      - ${SECONDARY_STORAGE}/media/anime:/data/anime
+      - ${SECONDARY_STORAGE}/media/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
 
   speedtest-tracker:
-        container_name: speedtest-tracker
-        ports:
-            - '8080:80'
-            - '8443:443'
-        environment:
-            - PUID=${PUID}
-            - PGID=${PGID}
-            - DB_CONNECTION=mysql
-            - DB_HOST=db
-            - DB_PORT=3306
-            - DB_DATABASE=speedtest_tracker
-            - DB_USERNAME=speedy
-            - DB_PASSWORD=password
-        volumes:
-            - speedtest-app:/config
-            - './web:/etc/ssl/web'
-        image: 'ghcr.io/alexjustesen/speedtest-tracker:latest'
-        restart: unless-stopped
-        depends_on:
-            - db
+    container_name: speedtest-tracker
+    ports:
+        - '8080:80'
+        - '8443:443'
+    environment:
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - DB_CONNECTION=mysql
+        - DB_HOST=db
+        - DB_PORT=3306
+        - DB_DATABASE=speedtest_tracker
+        - DB_USERNAME=speedy
+        - DB_PASSWORD=password
+    volumes:
+        - speedtest-app:/config
+        - './web:/etc/ssl/web'
+    image: 'ghcr.io/alexjustesen/speedtest-tracker:latest'
+    restart: unless-stopped
+    depends_on:
+        - db
 
   db:
-      image: mariadb:10
-      restart: always
-      environment:
-          - MARIADB_DATABASE=speedtest_tracker
-          - MARIADB_USER=speedy
-          - MARIADB_PASSWORD=password
-          - MARIADB_RANDOM_ROOT_PASSWORD=true
-      volumes:
-          - speedtest-db:/var/lib/mysql
+    image: mariadb:10
+    restart: always
+    environment:
+        - MARIADB_DATABASE=speedtest_tracker
+        - MARIADB_USER=speedy
+        - MARIADB_PASSWORD=password
+        - MARIADB_RANDOM_ROOT_PASSWORD=true
+    volumes:
+        - speedtest-db:/var/lib/mysql
 
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
+    env_file:
+      - .env
     ports:
       - 9443:9443
     volumes:
       - portainer-data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    networks:
+      pihole_network:
+        ipv4_address: '192.168.1.121'
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+      - "80:80/tcp"
+    environment:
+      TZ: 'Asia/Singapore'
+      WEBPASSWORD: ${WEBPASSWORD}
+    # Volumes store your data between container upgrades
+    volumes:
+      - '${PROJECT_FOLDER}/pihole/etc-pihole:/etc/pihole'
+      - '${PROJECT_FOLDER}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+    restart: unless-stopped
+
+networks:
+  pihole_network:
+    driver: macvlan
+    driver_opts:
+      parent: enp2s0
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.254
   
 volumes:
   speedtest-app:
