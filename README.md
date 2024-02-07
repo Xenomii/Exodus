@@ -95,8 +95,8 @@ The list below showcases the services that are planned to be/already installed:
 - [x] [Homepage](https://gethomepage.dev/latest/)
 - [x] [Jellyfin](https://jellyfin.org/)
 - [x] [Speedtest Tracker](https://github.com/alexjustesen/speedtest-tracker)
+- [x] [Pi-Hole](https://pi-hole.net/)
 - [ ] [Atsumeru](https://github.com/AtsumeruDev/Atsumeru)
-- [ ] [Pi-Hole](https://pi-hole.net/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
