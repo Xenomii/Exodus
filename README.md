@@ -115,6 +115,7 @@ The list below showcases the services that are planned to be/already installed:
 * [![Ubuntu][Ubuntu.os]][Ubuntu-url]
 * [![Docker][Docker.dev]][Docker-url]
 * [![Jellyfin][Jellyfin.dev]][Jellyfin-url]
+* [![Pihole][Pihole.dev]][Pihole-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -238,6 +239,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Docker-url]: https://www.docker.com/
 [Jellyfin.dev]: https://img.shields.io/badge/jellyfin-%23000B25.svg?style=for-the-badge&logo=Jellyfin&logoColor=00A4DC
 [Jellyfin-url]: https://jellyfin.org/
+[Pihole.dev]: https://img.shields.io/badge/pihole-%2396060C.svg?style=for-the-badge&logo=pi-hole&logoColor=white
+[Pihole-url]: https://pi-hole.net/
 <!-- [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
