@@ -10,4 +10,3 @@ config/*.xml
 web/
 duckdns/
 pihole/
-.env

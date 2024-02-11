@@ -13,7 +13,7 @@ services:
       - 3000:3000
     volumes:
       - ${PROJECT_FOLDER}/config:/app/config # Make sure your local config directory exists
-      - ${SECONDARY_STORAGE}:/omega
+      - ${SECONDARY_STORAGE}:/omega # If you do not have additional storage, comment this out
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped
 
@@ -25,6 +25,7 @@ services:
       - PGID=${PGID}
     volumes:
       - ${PROJECT_FOLDER}/config:/config
+      # Ensure these paths point to where your media is stored at on your machine
       - ${SECONDARY_STORAGE}/media/anime:/data/anime
       - ${SECONDARY_STORAGE}/media/movies:/data/movies
     ports:
