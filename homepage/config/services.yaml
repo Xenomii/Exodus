@@ -1,0 +1,47 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Media:
+    - Jellyfin:
+        href: http://exodus:8096
+        description: Free Software Media System
+        icon: si-jellyfin-#00A4DC
+        ping: http://jellyfin:8096
+        server: localdocker
+        container: jellyfin
+        widget:
+            type: jellyfin
+            url: http://jellyfin:8096
+            key: {{HOMEPAGE_VAR_JELLYFIN_API_KEY}}
+            enableBlocks: true # optional, defaults to false
+            enableNowPlaying: true # optional, defaults to true
+            enableUser: true # optional, defaults to false
+            showEpisodeNumber: true # optional, defaults to false
+            expandOneStreamToTwoRows: false # optional, defaults to true
+
+- Network:
+    - Pi-hole:
+        href: http://exodus/admin
+        description: Network Wide Ad Blocking
+        icon: si-pihole-#96060C
+        ping: http://pihole:80
+        server: localdocker
+        container: pihole
+        widget:
+            type: pihole
+            url: http://pihole:80
+            version: 6
+            key: {{HOMEPAGE_VAR_PIHOLE_PASSWORD}}
+    - Portainer:
+        href: https://exodus:9443
+        description: Making Docker Management Easy
+        icon: si-portainer-#13BEF9
+        ping: https://portainer:9443
+        server: localdocker
+        container: portainer
+        widget:
+            type: portainer
+            url: https://portainer:9443
+            env: 3
+            key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}

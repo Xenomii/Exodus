@@ -1,0 +1,14 @@
+.env
+
+ollama/*
+pihole/etc-pihole/*
+portainer/*
+jellyfin/*
+open-webui/data/*
+homepage/config/logs/homepage.log
+
+!ollama/README.md
+!pihole/etc-pihole/README.md
+!portainer/README.md
+!jellyfin/README.md
+!open-webui/data/README.md

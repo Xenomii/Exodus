@@ -1,0 +1,19 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Developer:
+    - Github:
+        - icon: si-github-#FFFFFF
+          href: https://github.com/Xenomii
+
+- Social:
+    - Reddit:
+        - icon: sh-reddit
+          href: https://reddit.com/
+          description: The front page of the Internet
+
+- Entertainment:
+    - YouTube:
+        - icon: sh-youtube
+          href: https://youtube.com/
